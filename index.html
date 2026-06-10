@@ -333,7 +333,7 @@
             box-shadow: 0 0 8px var(--neon-red);
         }
 
-        /* --- STYLING GROUP TOMBOL GAME (DIBUAT BERDAMPINGAN HORIZONTAL) --- */
+        /* --- STYLING GROUP TOMBOL GAME --- */
         .game-btn-group {
             display: flex;
             gap: 10px;
@@ -361,7 +361,6 @@
             text-align: center;
         }
 
-        /* Tombol FF Biasa (Warna Orange) */
         .btn-ff-normal {
             background: rgba(255, 85, 0, 0.02);
             border: 1px dashed rgba(255, 85, 0, 0.25);
@@ -373,7 +372,6 @@
             transform: translateY(-1.5px);
         }
 
-        /* Tombol FF MAX (Warna Cyan/Blue Cyber) */
         .btn-ff-max {
             background: rgba(0, 210, 255, 0.02);
             border: 1px dashed rgba(0, 210, 255, 0.25);
@@ -389,7 +387,6 @@
             transform: translateY(1px);
         }
 
-        /* --- STYLING NEW FOOTER ONLINE STATUS --- */
         footer {
             margin-top: 35px;
             display: flex;
@@ -422,7 +419,6 @@
             100% { transform: scale(0.9); opacity: 0.5; box-shadow: 0 0 6px var(--neon-green); }
         }
 
-        /* --- SOSMED KIRI BAWAH --- */
         .social-shortcut-container {
             position: fixed;
             bottom: 25px;
@@ -498,7 +494,7 @@
                     <div class="interactive-controls">
                         <span class="toggle-status-text">Mati</span>
                         <label class="tg-switch">
-                            <input type="checkbox" onchange="handleToggle(this)">
+                            <input type="checkbox" onchange="handleVisualToggleOnly(this)">
                             <span class="tg-slider"></span>
                         </label>
                     </div>
@@ -530,7 +526,7 @@
                     <div class="interactive-controls">
                         <span class="toggle-status-text">Mati</span>
                         <label class="tg-switch">
-                            <input type="checkbox" onchange="handleToggle(this)">
+                            <input type="checkbox" onchange="handleVisualToggleOnly(this)">
                             <span class="tg-slider"></span>
                         </label>
                     </div>
@@ -545,7 +541,7 @@
                     <div class="interactive-controls">
                         <span class="toggle-status-text">Mati</span>
                         <label class="tg-switch">
-                            <input type="checkbox" onchange="handleToggle(this)">
+                            <input type="checkbox" onchange="handleVisualToggleOnly(this)">
                             <span class="tg-slider"></span>
                         </label>
                     </div>
@@ -560,7 +556,7 @@
                     <div class="interactive-controls">
                         <span class="toggle-status-text">Mati</span>
                         <label class="tg-switch">
-                            <input type="checkbox" onchange="handleToggle(this)">
+                            <input type="checkbox" onchange="handleClearCacheReal(this)">
                             <span class="tg-slider"></span>
                         </label>
                     </div>
@@ -632,7 +628,59 @@
             document.getElementById('drag-val').innerText = val + '%';
         }
 
-        function handleToggle(checkbox) {
+        // FUNGSI KHUSUS CLEAR CACHE ASLI
+        async function handleClearCacheReal(checkbox) {
+            const card = checkbox.closest('.control-row');
+            const descText = card.querySelector('.desc-text');
+            const tracker = card.querySelector('.status-tracker');
+
+            if (checkbox.checked) {
+                card.style.borderColor = 'rgba(255, 0, 85, 0.3)';
+                card.style.backgroundColor = 'rgba(255, 0, 85, 0.02)';
+                descText.style.display = 'none';
+                tracker.style.display = 'block';
+                tracker.style.color = 'var(--neon-red)';
+                tracker.innerText = '[ CLEANING CACHE... ]';
+
+                try {
+                    // 1. Bersihkan Cache Storage bawaan browser/WebView jika ada
+                    if ('caches' in window) {
+                        const keys = await caches.keys();
+                        await Promise.all(keys.map(key => caches.delete(key)));
+                    }
+                    
+                    // 2. Bersihkan penyimpanan data local web
+                    localStorage.clear();
+                    sessionStorage.clear();
+
+                    // 3. Panggil Jembatan Java Android (jika dicompile lewat Android Studio)
+                    if (window.AndroidBridge && typeof window.AndroidBridge.clearCacheAsli === 'function') {
+                        window.AndroidBridge.clearCacheAsli();
+                    }
+
+                    // Tampilkan status sukses setelah proses selesai
+                    setTimeout(() => {
+                        tracker.innerText = '[ CACHE CLEARED SUCCESS ]';
+                        tracker.style.color = '#00ff66';
+                        updateStatusText(checkbox, true);
+                    }, 1000);
+
+                } catch (error) {
+                    tracker.innerText = '[ FAILED TO CLEAR ]';
+                    console.error(error);
+                }
+            } else {
+                card.style.borderColor = 'var(--card-border)';
+                card.style.backgroundColor = 'var(--card-bg)';
+                descText.style.display = 'block';
+                tracker.style.display = 'none';
+                tracker.innerText = '';
+                updateStatusText(checkbox, false);
+            }
+        }
+
+        // Fungsi Simulasi Visual untuk tombol lainnya (Optimize, 120 FPS, dll)
+        function handleVisualToggleOnly(checkbox) {
             const card = checkbox.closest('.control-row');
             const descText = card.querySelector('.desc-text');
             const tracker = card.querySelector('.status-tracker');
@@ -655,7 +703,7 @@
                         tracker.style.color = '#00ff66';
                         updateStatusText(checkbox, true);
                     } else {
-                        tracker.innerText = `[ SCANNING SYSTEM... ${progress}% ]`;
+                        tracker.innerText = `[ PROCESSING SYSTEM... ${progress}% ]`;
                     }
                 }, 100);
                 
@@ -683,6 +731,7 @@
             setTimeout(() => ripple.remove(), 600);
         }
 
+        // --- CYBER BACKGROUND GRAPHIC ---
         const canvas = document.getElementById('cyber-canvas');
         const ctx = canvas.getContext('2d');
         let nodes = [];
