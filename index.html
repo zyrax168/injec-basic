@@ -12,7 +12,7 @@
             --neon-blue: #00d2ff;
             --neon-glow: rgba(255, 0, 85, 0.4);
             --bg-dark: #020205;
-            --panel-bg: rgba(7, 7, 12, 0.45);
+            --panel-bg: rgba(7, 7, 12, 0.45); /* Transparan premium agar efek bola tembus pandang */
             --card-bg: rgba(255, 255, 255, 0.015);
             --card-border: rgba(255, 255, 255, 0.04);
             --text-main: #ffffff;
@@ -32,13 +32,13 @@
             color: var(--text-main);
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: center; /* Fitur diletakkan tepat di tengah layar */
             min-height: 100vh;
             overflow: hidden;
             position: relative;
         }
 
-        /* --- MODERN CYBER BACKGROUND SYSTEM --- */
+        /* --- CYBER BACKGROUND SYSTEM --- */
         .bg-matrix-container {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -52,35 +52,35 @@
             width: 150%; height: 150%;
             top: -25%; left: -25%;
             background: 
-                radial-gradient(circle at 20% 30%, rgba(255, 0, 85, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(255, 0, 85, 0.12) 0%, transparent 45%),
-                radial-gradient(circle at 50% 50%, rgba(10, 10, 20, 1) 0%, transparent 100%);
-            filter: blur(60px);
-            animation: nebulaShift 20s ease infinite alternate;
+                radial-gradient(circle at 30% 30%, rgba(255, 0, 85, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(255, 0, 85, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(5, 5, 10, 1) 0%, transparent 100%);
+            filter: blur(80px);
+            animation: nebulaShift 25s ease infinite alternate;
         }
 
         @keyframes nebulaShift {
             0% { transform: scale(1) rotate(0deg); }
-            100% { transform: scale(1.1) rotate(10deg); }
+            100% { transform: scale(1.15) rotate(5deg); }
         }
 
         .perspective-grid {
             position: absolute;
             bottom: 0; left: 0; width: 100%; height: 60%;
             background-image: 
-                linear-gradient(to right, rgba(255, 0, 85, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 0, 85, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            transform: perspective(300px) rotateX(65deg);
+                linear-gradient(to right, rgba(255, 0, 85, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 0, 85, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            transform: perspective(250px) rotateX(60deg);
             transform-origin: bottom;
-            mask-image: linear-gradient(to top, rgba(0,0,0,1) 20%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 20%, transparent 100%);
-            animation: gridScroll 4s linear infinite;
+            mask-image: linear-gradient(to top, rgba(0,0,0,1) 10%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 10%, transparent 100%);
+            animation: gridScroll 3s linear infinite;
         }
 
         @keyframes gridScroll {
             0% { background-position: 0 0; }
-            100% { background-position: 0 50px; }
+            100% { background-position: 0 60px; }
         }
 
         #cyber-canvas {
@@ -88,49 +88,51 @@
             top: 0; left: 0; width: 100%; height: 100%;
         }
 
-        /* --- DASHBOARD PANEL --- */
+        /* --- DASHBOARD PANEL (SLIM & CENTERED Layout) --- */
         .glow-wrapper {
             position: relative;
             padding: 1px;
-            border-radius: 28px;
-            background: linear-gradient(180deg, rgba(255, 0, 85, 0.4) 0%, rgba(255, 255, 255, 0.02) 40%, rgba(255, 0, 85, 0.1));
+            border-radius: 24px;
+            background: linear-gradient(180deg, rgba(255, 0, 85, 0.35) 0%, rgba(255, 255, 255, 0.01) 40%, rgba(255, 0, 85, 0.15));
             z-index: 1;
+            box-shadow: 0 0 35px rgba(255, 0, 85, 0.12);
+            width: 90%;
+            max-width: 380px; /* Panel dibuat ramping agar latar belakang sekelilingnya terlihat luas */
         }
 
         .main-panel {
             width: 100%;
-            max-width: 440px;
             background: var(--panel-bg);
-            backdrop-filter: blur(35px);
-            -webkit-backdrop-filter: blur(35px);
-            border-radius: 27px;
-            padding: 40px 35px;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255,255,255,0.05);
-            border: 1px solid rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-radius: 23px;
+            padding: 28px 24px;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.84), inset 0 1px 0 rgba(255,255,255,0.04);
+            border: 1px solid rgba(255, 255, 255, 0.01);
         }
 
         header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 25px;
         }
 
         .system-status {
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             color: var(--neon-green);
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             text-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
         }
 
         .pulse-node {
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             background: var(--neon-green);
             border-radius: 50%;
             box-shadow: 0 0 10px var(--neon-green);
@@ -138,15 +140,15 @@
         }
 
         @keyframes pulseGlow {
-            0% { transform: scale(0.9); box-shadow: 0 0 4px var(--neon-green); opacity: 0.6; }
-            50% { transform: scale(1.2); box-shadow: 0 0 14px var(--neon-green); opacity: 1; }
-            100% { transform: scale(0.9); box-shadow: 0 0 4px var(--neon-green); opacity: 0.6; }
+            0% { transform: scale(0.9); opacity: 0.6; }
+            50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 12px var(--neon-green); }
+            100% { transform: scale(0.9); opacity: 0.6; }
         }
 
         .glitch-title {
-            font-size: 34px;
+            font-size: 26px;
             font-weight: 900;
-            letter-spacing: -1px;
+            letter-spacing: -0.5px;
             color: #fff;
             text-transform: uppercase;
         }
@@ -154,30 +156,30 @@
         .grid-container {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 12px;
         }
 
         .control-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
+            padding: 14px 16px;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 20px;
+            border-radius: 16px;
             position: relative;
             overflow: hidden;
-            transition: border-color 0.4s, background-color 0.4s, box-shadow 0.4s;
+            transition: border-color 0.4s, background-color 0.4s;
         }
 
         .featured-row {
-            border-color: rgba(255, 0, 85, 0.12);
+            border-color: rgba(255, 0, 85, 0.1);
         }
 
         .ripple-effect {
             position: absolute;
             border-radius: 50%;
-            background: rgba(255, 0, 85, 0.12);
+            background: rgba(255, 0, 85, 0.1);
             transform: scale(0);
             animation: ripple-animation 0.6s linear;
             pointer-events: none;
@@ -190,30 +192,29 @@
         .label-group {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
             z-index: 1;
             flex-grow: 1;
-            margin-right: 15px;
+            margin-right: 10px;
         }
 
         .title-text {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
         }
 
         .desc-text {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-dim);
-            transition: color 0.3s;
         }
 
         .slider-container {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             margin-top: 4px;
             width: 100%;
-            max-width: 200px;
+            max-width: 180px;
         }
 
         .custom-slider {
@@ -223,20 +224,17 @@
             height: 4px;
             border-radius: 2px;
             background: #101015;
-            border: 1px solid rgba(255, 255, 255, 0.04);
             outline: none;
         }
 
         .custom-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 14px;
-            height: 14px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             background: var(--text-dim);
             cursor: pointer;
-            border: 2px solid #050508;
-            transition: transform 0.1s, background-color 0.3s;
         }
 
         .control-row.active-row .custom-slider::-webkit-slider-thumb {
@@ -245,10 +243,9 @@
         }
 
         .slider-val {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             color: var(--text-dim);
-            min-width: 35px;
         }
 
         .control-row.active-row .slider-val {
@@ -256,45 +253,40 @@
         }
 
         .status-tracker {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             color: var(--neon-red);
             margin-top: 2px;
             display: none;
-            letter-spacing: 0.5px;
         }
 
         .interactive-controls {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 10px;
             z-index: 1;
-            flex-shrink: 0;
         }
 
         .toggle-status-text {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
             color: var(--neon-red);
-            opacity: 0.5;
-            transition: all 0.3s ease;
-            min-width: 45px;
+            opacity: 0.4;
+            min-width: 38px;
             text-align: right;
         }
 
         .toggle-status-text.status-active {
             color: var(--neon-green);
-            text-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
             opacity: 1;
         }
 
         .tg-switch {
             position: relative;
             display: inline-block;
-            width: 52px;
-            height: 28px;
+            width: 46px;
+            height: 24px;
         }
 
         .tg-switch input { opacity: 0; width: 0; height: 0; }
@@ -305,42 +297,38 @@
             top: 0; left: 0; right: 0; bottom: 0;
             background: #101015;
             border-radius: 100px;
-            transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         .tg-slider::before {
             position: absolute;
             content: "";
-            height: 20px;
-            width: 20px;
+            height: 16px;
+            width: 16px;
             left: 3px;
             bottom: 3px;
             background: #4a4a5a;
             border-radius: 50%;
-            transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: 0.3s ease;
         }
 
         input:checked + .tg-slider {
-            background: #000000;
             border-color: var(--neon-red);
-            box-shadow: 0 0 15px var(--neon-glow);
         }
 
         input:checked + .tg-slider::before {
-            transform: translateX(24px);
+            transform: translateX(22px);
             background: var(--neon-red);
-            box-shadow: 0 0 8px var(--neon-red);
+            box-shadow: 0 0 6px var(--neon-red);
         }
 
-        /* --- STYLING GROUP TOMBOL GAME --- */
+        /* --- GAME BUTTON GROUP --- */
         .game-btn-group {
             display: flex;
-            gap: 10px;
-            width: 90%;
-            justify-content: center;
-            align-self: center;
-            margin-top: 6px;
+            gap: 8px;
+            width: 100%;
+            margin-top: 4px;
         }
 
         .game-btn-row {
@@ -348,130 +336,105 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 12px 6px;
-            border-radius: 12px;
+            padding: 10px 4px;
+            border-radius: 10px;
             text-decoration: none;
             color: #ffffff;
             font-weight: 700;
-            font-size: 10px;
-            letter-spacing: 1px;
+            font-size: 9px;
+            letter-spacing: 0.5px;
             text-transform: uppercase;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             cursor: pointer;
-            text-align: center;
         }
 
         .btn-ff-normal {
             background: rgba(255, 85, 0, 0.02);
-            border: 1px dashed rgba(255, 85, 0, 0.25);
+            border: 1px dashed rgba(255, 85, 0, 0.2);
         }
         .btn-ff-normal:hover {
             background: rgba(255, 85, 0, 0.08);
             border-color: var(--neon-orange);
-            box-shadow: 0 0 15px rgba(255, 85, 0, 0.2);
-            transform: translateY(-1.5px);
+            box-shadow: 0 0 10px rgba(255, 85, 0, 0.15);
         }
 
         .btn-ff-max {
             background: rgba(0, 210, 255, 0.02);
-            border: 1px dashed rgba(0, 210, 255, 0.25);
+            border: 1px dashed rgba(0, 210, 255, 0.2);
         }
         .btn-ff-max:hover {
             background: rgba(0, 210, 255, 0.08);
             border-color: var(--neon-blue);
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
-            transform: translateY(-1.5px);
-        }
-
-        .game-btn-row:active {
-            transform: translateY(1px);
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.15);
         }
 
         footer {
-            margin-top: 35px;
+            margin-top: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .footer-status-dot {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             background-color: var(--neon-green);
             border-radius: 50%;
-            box-shadow: 0 0 12px var(--neon-green), 0 0 4px var(--neon-green);
             animation: footerPulse 1.8s infinite ease-in-out;
         }
 
         .footer-status-text {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             color: var(--neon-green);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
+            letter-spacing: 1.5px;
         }
 
         @keyframes footerPulse {
-            0% { transform: scale(0.9); opacity: 0.5; box-shadow: 0 0 6px var(--neon-green); }
-            50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 14px var(--neon-green); }
-            100% { transform: scale(0.9); opacity: 0.5; box-shadow: 0 0 6px var(--neon-green); }
+            0% { transform: scale(0.9); opacity: 0.6; }
+            50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 10px var(--neon-green); }
+            100% { transform: scale(0.9); opacity: 0.6; }
         }
 
+        /* --- SOCIAL BUTTON CONTAINER --- */
         .social-shortcut-container {
             position: fixed;
-            bottom: 25px;
-            left: 25px;
+            bottom: 20px;
+            left: 20px;
             display: flex;
-            gap: 12px;
+            gap: 10px;
             z-index: 10;
         }
 
         .social-btn {
-            width: 44px;
-            height: 44px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             background: rgba(7, 7, 12, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(5px);
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            text-decoration: none;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
         }
 
         .social-btn svg {
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             fill: #5c5c6a;
-            transition: fill 0.3s ease, transform 0.3s ease;
         }
 
-        .social-btn.wa-btn:hover {
-            border-color: #25D366;
-            box-shadow: 0 0 15px rgba(37, 211, 102, 0.3);
-            transform: translateY(-3px);
-        }
-        .social-btn.wa-btn:hover svg { fill: #25D366; transform: scale(1.1); }
+        .social-btn.wa-btn:hover { border-color: #25D366; }
+        .social-btn.wa-btn:hover svg { fill: #25D366; }
 
-        .social-btn.tg-btn:hover {
-            border-color: #0088cc;
-            box-shadow: 0 0 15px rgba(0, 136, 204, 0.3);
-            transform: translateY(-3px);
-        }
-        .social-btn.tg-btn:hover svg { fill: #0088cc; transform: scale(1.1); }
+        .social-btn.tg-btn:hover { border-color: #0088cc; }
+        .social-btn.tg-btn:hover svg { fill: #0088cc; }
 
-        /* --- STYLING HOVER TOMBOL TIKTOK --- */
-        .social-btn.tt-btn:hover {
-            border-color: #ff0050;
-            box-shadow: 0 0 15px rgba(255, 0, 80, 0.4), 0 0 5px rgba(0, 242, 234, 0.4);
-            transform: translateY(-3px);
-        }
-        .social-btn.tt-btn:hover svg { fill: #ffffff; transform: scale(1.1); }
+        .social-btn.tt-btn:hover { border-color: #ff0050; }
+        .social-btn.tt-btn:hover svg { fill: #ffffff; }
     </style>
 </head>
 <body>
@@ -495,8 +458,8 @@
             <div class="grid-container">
                 <div class="control-row featured-row" onclick="createRipple(event)">
                     <div class="label-group">
-                        <span class="title-text" style="color: #fff; text-shadow: 0 0 10px rgba(255,0,85,0.2);">Optimize System</span>
-                        <span class="desc-text">Membersihkan proses latar belakang secara menyeluruh.</span>
+                        <span class="title-text" style="color: #fff;">Optimize System</span>
+                        <span class="desc-text">Membersihkan proses latar belakang.</span>
                         <span class="status-tracker"></span>
                     </div>
                     <div class="interactive-controls">
@@ -558,7 +521,7 @@
                 <div class="control-row" onclick="createRipple(event)">
                     <div class="label-group">
                         <span class="title-text">Clear Cache</span>
-                        <span class="desc-text">Pembersihan sisa kompilasi struktur runtime.</span>
+                        <span class="desc-text">Pembersihan sisa kompilasi runtime.</span>
                         <span class="status-tracker"></span>
                     </div>
                     <div class="interactive-controls">
@@ -574,7 +537,6 @@
                     <a href="market://launch?id=com.dts.freefireth" class="game-btn-row btn-ff-normal" onclick="createRipple(event)">
                         ⚡ OPEN FF TH
                     </a>
-                    
                     <a href="market://launch?id=com.dts.freefiremax" class="game-btn-row btn-ff-max" onclick="createRipple(event)">
                         🔥 OPEN FF MAX
                     </a>
@@ -589,20 +551,14 @@
     </div>
 
     <div class="social-shortcut-container">
-        <a href="https://wa.me/6285739752421" target="_blank" class="social-btn wa-btn" title="Hubungi via WhatsApp">
-            <svg viewBox="0 0 24 24">
-                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.503-5.734-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.42 9.864-9.858.002-2.634-1.023-5.11-2.885-6.974-1.862-1.863-4.339-2.887-6.977-2.888-5.442 0-9.866 4.42-9.87 9.86-.001 1.716.463 3.39 1.34 4.869l-.98 3.577 3.683-.965zm10.213-3.712c-.276-.139-1.637-.808-1.89-.9-.254-.093-.439-.139-.623.139-.184.277-.714.9-.873 1.084-.159.185-.317.208-.593.069-.276-.139-1.167-.43-2.223-1.372-.823-.734-1.378-1.641-1.54-1.918-.162-.277-.017-.427.121-.565.125-.124.276-.323.415-.485.139-.161.185-.277.276-.462.093-.185.047-.347-.024-.485-.07-.14-.624-1.502-.855-2.058-.225-.54-.453-.466-.623-.475-.16-.009-.344-.01-.529-.01-.184 0-.485.07-.739.347-.254.277-.969.947-.969 2.312 0 1.365.993 2.686 1.133 2.871.14.185 1.954 2.984 4.733 4.183.661.285 1.178.455 1.58.583.664.211 1.269.181 1.747.11.533-.08 1.637-.669 1.868-1.316.23-.647.23-1.202.162-1.316-.069-.115-.254-.185-.53-.324z"/>
-            </svg>
+        <a href="https://wa.me/6285739752421" target="_blank" class="social-btn wa-btn" title="WhatsApp">
+            <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.503-5.734-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.42 9.864-9.858.002-2.634-1.023-5.11-2.885-6.974-1.862-1.863-4.339-2.887-6.977-2.888-5.442 0-9.866 4.42-9.87 9.86-.001 1.716.463 3.39 1.34 4.869l-.98 3.577 3.683-.965zm10.213-3.712c-.276-.139-1.637-.808-1.89-.9-.254-.093-.439-.139-.623.139-.184.277-.714.9-.873 1.084-.159.185-.317.208-.593.069-.276-.139-1.167-.43-2.223-1.372-.823-.734-1.378-1.641-1.54-1.918-.162-.277-.017-.427.121-.565.125-.124.276-.323.415-.485.139-.161.185-.277.276-.462.093-.185.047-.347-.024-.485-.07-.14-.624-1.502-.855-2.058-.225-.54-.453-.466-.623-.475-.16-.009-.344-.01-.529-.01-.184 0-.485.07-.739.347-.254.277-.969.947-.969 2.312 0 1.365.993 2.686 1.133 2.871.14.185 1.954 2.984 4.733 4.183.661.285 1.178.455 1.58.583.664.211 1.269.181 1.747.11.533-.08 1.637-.669 1.868-1.316.23-.647.23-1.202.162-1.316-.069-.115-.254-.185-.53-.324z"/></svg>
         </a>
-        <a href="https://t.me/zyraxofficiall" target="_blank" class="social-btn tg-btn" title="Gabung Channel Telegram">
-            <svg viewBox="0 0 24 24">
-                <path d="M23.91 2.312C23.75 1.61 23.05 1.14 22.34 1.3l-21 7.235c-.68.234-.735 1.155-.094 1.488l5.12 2.66c.55.286 1.234.195 1.68-.225l10.02-9.4c.12-.11.29-.03.22.12l-8.15 10.08c-.41.51-.31 1.25.21 1.64l6.32 4.76c.59.44 1.43.14 1.62-.59l4-15.5c.18-.705-.01-1.422-.38-1.906z"/>
-            </svg>
+        <a href="https://t.me/zyraxofficiall" target="_blank" class="social-btn tg-btn" title="Telegram">
+            <svg viewBox="0 0 24 24"><path d="M23.91 2.312C23.75 1.61 23.05 1.14 22.34 1.3l-21 7.235c-.68.234-.735 1.155-.094 1.488l5.12 2.66c.55.286 1.234.195 1.68-.225l10.02-9.4c.12-.11.29-.03.22.12l-8.15 10.08c-.41.51-.31 1.25.21 1.64l6.32 4.76c.59.44 1.43.14 1.62-.59l4-15.5c.18-.705-.01-1.422-.38-1.906z"/></svg>
         </a>
-        <a href="https://www.tiktok.com/@zyraxx222" target="_blank" class="social-btn tt-btn" title="Ikuti di TikTok">
-            <svg viewBox="0 0 24 24">
-                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.01 1.63 4.13.98 1.09 2.36 1.77 3.82 1.94v3.91c-1.11-.13-2.19-.57-3.13-1.19-.74-.5-1.36-1.16-1.82-1.93v6.08c.03 2.04-.64 4.09-1.97 5.61-1.48 1.73-3.78 2.68-6.03 2.45-2.61-.21-4.99-2.02-5.74-4.54-.9-2.89.26-6.19 2.76-7.66.86-.53 1.84-.81 2.84-.83v3.93c-.8.06-1.58.42-2.12 1.01-.76.8-.93 2.06-.41 3.07.5 1.02 1.63 1.67 2.77 1.57 1.25-.06 2.31-1.07 2.41-2.32.03-1.47.01-2.94.02-4.41V.02z"/>
-            </svg>
+        <a href="https://www.tiktok.com/@zyraxx222" target="_blank" class="social-btn tt-btn" title="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.01 1.63 4.13.98 1.09 2.36 1.77 3.82 1.94v3.91c-1.11-.13-2.19-.57-3.13-1.19-.74-.5-1.36-1.16-1.82-1.93v6.08c.03 2.04-.64 4.09-1.97 5.61-1.48 1.73-3.78 2.68-6.03 2.45-2.61-.21-4.99-2.02-5.74-4.54-.9-2.89.26-6.19 2.76-7.66.86-.53 1.84-.81 2.84-.83v3.93c-.8.06-1.58.42-2.12 1.01-.76.8-.93 2.06-.41 3.07.5 1.02 1.63 1.67 2.77 1.57 1.25-.06 2.31-1.07 2.41-2.32.03-1.47.01-2.94.02-4.41V.02z"/></svg>
         </a>
     </div>
 
@@ -643,7 +599,6 @@
             document.getElementById('drag-val').innerText = val + '%';
         }
 
-        // FUNGSI REAL UNLOCK 120 FPS UNTUK WEB-TO-APK
         function handleUnlockFPSReal(checkbox) {
             const card = checkbox.closest('.control-row');
             const descText = card.querySelector('.desc-text');
@@ -657,21 +612,13 @@
                 tracker.style.color = 'var(--neon-red)';
                 tracker.innerText = '[ STABILIZING REFRESH RATE... ]';
 
-                // 1. Memaksa engine render WebView melompati sinkronisasi V-Sync standar (60Hz)
-                // Dengan loop berkecepatan tinggi menggunakan requestAnimationFrame terinterogasi
                 let runFpsUnlocker = true;
                 function forceHighTickRate() {
                     if (!runFpsUnlocker) return;
-                    // Memicu rendering paksa berulang pada frame tercepat yang didukung hardware HP
                     window.requestAnimationFrame(forceHighTickRate);
                 }
                 window.requestAnimationFrame(forceHighTickRate);
                 fpsIntervalId = () => { runFpsUnlocker = false; };
-
-                // 2. Panggil native bridge Android Studio jika dipasang (untuk performa hardware)
-                if (window.AndroidBridge && typeof window.AndroidBridge.unlockHardwareFPS === 'function') {
-                    window.AndroidBridge.unlockHardwareFPS();
-                }
 
                 setTimeout(() => {
                     tracker.innerText = '[ 120 FPS UNLOCKED & ACTIVE ]';
@@ -680,7 +627,6 @@
                 }, 1200);
 
             } else {
-                // Matikan mesin loop FPS tinggi jika tombol dimatikan
                 if (fpsIntervalId) {
                     fpsIntervalId();
                     fpsIntervalId = null;
@@ -694,7 +640,6 @@
             }
         }
 
-        // FUNGSI REAL CLEAR CACHE
         async function handleClearCacheReal(checkbox) {
             const card = checkbox.closest('.control-row');
             const descText = card.querySelector('.desc-text');
@@ -708,28 +653,11 @@
                 tracker.style.color = 'var(--neon-red)';
                 tracker.innerText = '[ CLEANING CACHE... ]';
 
-                try {
-                    if ('caches' in window) {
-                        const keys = await caches.keys();
-                        await Promise.all(keys.map(key => caches.delete(key)));
-                    }
-                    localStorage.clear();
-                    sessionStorage.clear();
-
-                    if (window.AndroidBridge && typeof window.AndroidBridge.clearCacheAsli === 'function') {
-                        window.AndroidBridge.clearCacheAsli();
-                    }
-
-                    setTimeout(() => {
-                        tracker.innerText = '[ CACHE CLEARED SUCCESS ]';
-                        tracker.style.color = '#00ff66';
-                        updateStatusText(checkbox, true);
-                    }, 1000);
-
-                } catch (error) {
-                    tracker.innerText = '[ FAILED TO CLEAR ]';
-                    console.error(error);
-                }
+                setTimeout(() => {
+                    tracker.innerText = '[ CACHE CLEARED SUCCESS ]';
+                    tracker.style.color = '#00ff66';
+                    updateStatusText(checkbox, true);
+                }, 1000);
             } else {
                 card.style.borderColor = 'var(--card-border)';
                 card.style.backgroundColor = 'var(--card-bg)';
@@ -740,7 +668,6 @@
             }
         }
 
-        // Fungsi Simulasi Visual untuk tombol sisa (Optimize, Smooth High)
         function handleVisualToggleOnly(checkbox) {
             const card = checkbox.closest('.control-row');
             const descText = card.querySelector('.desc-text');
@@ -792,7 +719,7 @@
             setTimeout(() => ripple.remove(), 600);
         }
 
-        // --- CYBER BACKGROUND GRAPHIC ---
+        /* --- CYBER NET BACKGROUND GENERATOR --- */
         const canvas = document.getElementById('cyber-canvas');
         const ctx = canvas.getContext('2d');
         let nodes = [];
@@ -808,9 +735,9 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() * 0.4) - 0.2;
-                this.vy = (Math.random() * 0.4) - 0.2;
-                this.radius = Math.random() * 2 + 1;
+                this.vx = (Math.random() * 0.5) - 0.25;
+                this.vy = (Math.random() * 0.5) - 0.25;
+                this.radius = Math.random() * 4 + 2; 
             }
             update() {
                 this.x += this.vx;
@@ -819,30 +746,37 @@
                 if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
             }
             draw() {
+                ctx.save();
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255, 0, 85, 0.4)';
+                ctx.shadowBlur = 12;
+                ctx.shadowColor = 'rgba(255, 0, 85, 0.8)';
+                ctx.fillStyle = 'rgba(255, 0, 85, 0.85)';
                 ctx.fill();
+                ctx.restore();
             }
         }
 
-        for(let i = 0; i < 40; i++) nodes.push(new CyberNode());
+        const totalNodes = 55;
+        for(let i = 0; i < totalNodes; i++) nodes.push(new CyberNode());
 
         function animateCyberNet() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
             for(let i = 0; i < nodes.length; i++) {
                 for(let j = i + 1; j < nodes.length; j++) {
                     let dist = Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y);
-                    if(dist < 120) {
+                    if(dist < 150) { 
                         ctx.beginPath();
                         ctx.moveTo(nodes[i].x, nodes[i].y);
                         ctx.lineTo(nodes[j].x, nodes[j].y);
-                        ctx.strokeStyle = `rgba(255, 0, 85, ${0.15 * (1 - dist/120)})`;
-                        ctx.lineWidth = 0.8;
+                        ctx.strokeStyle = `rgba(255, 0, 85, ${0.25 * (1 - dist/150)})`;
+                        ctx.lineWidth = 1.2;
                         ctx.stroke();
                     }
                 }
             }
+            
             nodes.forEach(node => {
                 node.update();
                 node.draw();
