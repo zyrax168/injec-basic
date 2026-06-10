@@ -9,6 +9,7 @@
             --neon-red: #ff0055;
             --neon-green: #00ff66;
             --neon-orange: #ff5500;
+            --neon-blue: #00d2ff;
             --neon-glow: rgba(255, 0, 85, 0.4);
             --bg-dark: #020205;
             --panel-bg: rgba(7, 7, 12, 0.45);
@@ -332,32 +333,55 @@
             box-shadow: 0 0 8px var(--neon-red);
         }
 
-        /* --- STYLING: TOMBOL GAME MINIMALIS MODERN --- */
+        /* --- STYLING GROUP TOMBOL GAME (DIBUAT BERDAMPINGAN HORIZONTAL) --- */
+        .game-btn-group {
+            display: flex;
+            gap: 10px;
+            width: 90%;
+            justify-content: center;
+            align-self: center;
+            margin-top: 6px;
+        }
+
         .game-btn-row {
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 12px;
-            background: rgba(255, 85, 0, 0.02);
-            border: 1px dashed rgba(255, 85, 0, 0.2);
-            border-radius: 14px;
+            padding: 12px 6px;
+            border-radius: 12px;
             text-decoration: none;
             color: #ffffff;
             font-weight: 700;
-            font-size: 11px;
-            letter-spacing: 2px;
+            font-size: 10px;
+            letter-spacing: 1px;
             text-transform: uppercase;
             transition: all 0.4s ease;
-            margin-top: 6px;
             cursor: pointer;
-            align-self: center;
-            width: 85%;
+            text-align: center;
         }
 
-        .game-btn-row:hover {
+        /* Tombol FF Biasa (Warna Orange) */
+        .btn-ff-normal {
+            background: rgba(255, 85, 0, 0.02);
+            border: 1px dashed rgba(255, 85, 0, 0.25);
+        }
+        .btn-ff-normal:hover {
             background: rgba(255, 85, 0, 0.08);
             border-color: var(--neon-orange);
-            box-shadow: 0 0 15px rgba(255, 85, 0, 0.15);
+            box-shadow: 0 0 15px rgba(255, 85, 0, 0.2);
+            transform: translateY(-1.5px);
+        }
+
+        /* Tombol FF MAX (Warna Cyan/Blue Cyber) */
+        .btn-ff-max {
+            background: rgba(0, 210, 255, 0.02);
+            border: 1px dashed rgba(0, 210, 255, 0.25);
+        }
+        .btn-ff-max:hover {
+            background: rgba(0, 210, 255, 0.08);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
             transform: translateY(-1.5px);
         }
 
@@ -542,10 +566,15 @@
                     </div>
                 </div>
 
-                <!-- TAUTAN KHUSUS WEBVIEW APK (MENGGUNAKAN MARKET LAUNCH SCHEME) -->
-                <a href="market://launch?id=com.dts.freefireth" class="game-btn-row" onclick="createRipple(event)">
-                    ⚡ LAUNCH FREE FIRE
-                </a>
+                <div class="game-btn-group">
+                    <a href="market://launch?id=com.dts.freefireth" class="game-btn-row btn-ff-normal" onclick="createRipple(event)">
+                        ⚡ OPEN FF TH
+                    </a>
+                    
+                    <a href="market://launch?id=com.dts.freefiremax" class="game-btn-row btn-ff-max" onclick="createRipple(event)">
+                        🔥 OPEN FF MAX
+                    </a>
+                </div>
             </div>
 
             <footer>
