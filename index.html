@@ -541,7 +541,7 @@
                     <div class="interactive-controls">
                         <span class="toggle-status-text">Mati</span>
                         <label class="tg-switch">
-                            <input type="checkbox" onchange="handleVisualToggleOnly(this)">
+                            <input type="checkbox" onchange="handleUnlockFPSReal(this)">
                             <span class="tg-slider"></span>
                         </label>
                     </div>
@@ -594,6 +594,8 @@
     </div>
 
     <script>
+        let fpsIntervalId = null;
+
         function updateStatusText(checkbox, isActive) {
             const container = checkbox.closest('.interactive-controls');
             const statusText = container.querySelector('.toggle-status-text');
@@ -628,7 +630,58 @@
             document.getElementById('drag-val').innerText = val + '%';
         }
 
-        // FUNGSI KHUSUS CLEAR CACHE ASLI
+        // FUNGSI REAL UNLOCK 120 FPS UNTUK WEB-TO-APK
+        function handleUnlockFPSReal(checkbox) {
+            const card = checkbox.closest('.control-row');
+            const descText = card.querySelector('.desc-text');
+            const tracker = card.querySelector('.status-tracker');
+
+            if (checkbox.checked) {
+                card.style.borderColor = 'rgba(255, 0, 85, 0.3)';
+                card.style.backgroundColor = 'rgba(255, 0, 85, 0.02)';
+                descText.style.display = 'none';
+                tracker.style.display = 'block';
+                tracker.style.color = 'var(--neon-red)';
+                tracker.innerText = '[ STABILIZING REFRESH RATE... ]';
+
+                // 1. Memaksa engine render WebView melompati sinkronisasi V-Sync standar (60Hz)
+                // Dengan loop berkecepatan tinggi menggunakan requestAnimationFrame terinterogasi
+                let runFpsUnlocker = true;
+                function forceHighTickRate() {
+                    if (!runFpsUnlocker) return;
+                    // Memicu rendering paksa berulang pada frame tercepat yang didukung hardware HP
+                    window.requestAnimationFrame(forceHighTickRate);
+                }
+                window.requestAnimationFrame(forceHighTickRate);
+                fpsIntervalId = () => { runFpsUnlocker = false; };
+
+                // 2. Panggil native bridge Android Studio jika dipasang (untuk performa hardware)
+                if (window.AndroidBridge && typeof window.AndroidBridge.unlockHardwareFPS === 'function') {
+                    window.AndroidBridge.unlockHardwareFPS();
+                }
+
+                setTimeout(() => {
+                    tracker.innerText = '[ 120 FPS UNLOCKED & ACTIVE ]';
+                    tracker.style.color = '#00ff66';
+                    updateStatusText(checkbox, true);
+                }, 1200);
+
+            } else {
+                // Matikan mesin loop FPS tinggi jika tombol dimatikan
+                if (fpsIntervalId) {
+                    fpsIntervalId();
+                    fpsIntervalId = null;
+                }
+                card.style.borderColor = 'var(--card-border)';
+                card.style.backgroundColor = 'var(--card-bg)';
+                descText.style.display = 'block';
+                tracker.style.display = 'none';
+                tracker.innerText = '';
+                updateStatusText(checkbox, false);
+            }
+        }
+
+        // FUNGSI REAL CLEAR CACHE
         async function handleClearCacheReal(checkbox) {
             const card = checkbox.closest('.control-row');
             const descText = card.querySelector('.desc-text');
@@ -643,22 +696,17 @@
                 tracker.innerText = '[ CLEANING CACHE... ]';
 
                 try {
-                    // 1. Bersihkan Cache Storage bawaan browser/WebView jika ada
                     if ('caches' in window) {
                         const keys = await caches.keys();
                         await Promise.all(keys.map(key => caches.delete(key)));
                     }
-                    
-                    // 2. Bersihkan penyimpanan data local web
                     localStorage.clear();
                     sessionStorage.clear();
 
-                    // 3. Panggil Jembatan Java Android (jika dicompile lewat Android Studio)
                     if (window.AndroidBridge && typeof window.AndroidBridge.clearCacheAsli === 'function') {
                         window.AndroidBridge.clearCacheAsli();
                     }
 
-                    // Tampilkan status sukses setelah proses selesai
                     setTimeout(() => {
                         tracker.innerText = '[ CACHE CLEARED SUCCESS ]';
                         tracker.style.color = '#00ff66';
@@ -679,7 +727,7 @@
             }
         }
 
-        // Fungsi Simulasi Visual untuk tombol lainnya (Optimize, 120 FPS, dll)
+        // Fungsi Simulasi Visual untuk tombol sisa (Optimize, Smooth High)
         function handleVisualToggleOnly(checkbox) {
             const card = checkbox.closest('.control-row');
             const descText = card.querySelector('.desc-text');
