@@ -332,7 +332,7 @@
             box-shadow: 0 0 8px var(--neon-red);
         }
 
-        /* --- MODIFIKASI: TOMBOL LAUNCH GAME YANG LEBIH KECIL & MINIMALIS --- */
+        /* --- STYLING: TOMBOL GAME MINIMALIS MODERN --- */
         .game-btn-row {
             display: flex;
             justify-content: center;
@@ -351,7 +351,7 @@
             margin-top: 6px;
             cursor: pointer;
             align-self: center;
-            width: 85%; /* Dibuat sedikit ramping ke tengah */
+            width: 85%;
         }
 
         .game-btn-row:hover {
@@ -542,8 +542,8 @@
                     </div>
                 </div>
 
-                <!-- TOMBOL YANG SUDAH DIPERKECIL DAN RAMPIING -->
-                <a href="intent://#Intent;package=com.dts.freefireth;end" class="game-btn-row" onclick="createRipple(event)">
+                <!-- INTEGRASI TOMBOL LAUNCH GAME FIX INTENT (FREE FIRE REGULER) -->
+                <a href="intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.dts.freefireth;end" class="game-btn-row" onclick="createRipple(event)">
                     ⚡ LAUNCH FREE FIRE
                 </a>
             </div>
@@ -599,9 +599,9 @@
             }
         }
 
-        document.getElementById('drag-range').addEventListener('input', function() {
-            document.getElementById('drag-val').innerText = this.value + '%';
-        });
+        function updateSliderVal(val) {
+            document.getElementById('drag-val').innerText = val + '%';
+        }
 
         function handleToggle(checkbox) {
             const card = checkbox.closest('.control-row');
